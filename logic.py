@@ -31,3 +31,16 @@ def sum_by_category(expenses):
         totals[cat] = totals.get(cat, 0) + expense["amount"] 
 
     return {cat: round(total, 2) for cat, total in totals.items()} 
+
+
+def sum_total(expenses): 
+
+    """Atgriež vārdnīcu: {kategorija: summa}.""" 
+
+    totals = 0
+
+    for expense in expenses: 
+
+        totals += expense["amount"] 
+
+    return totals 
