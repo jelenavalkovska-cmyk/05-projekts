@@ -1,4 +1,4 @@
-from storage import load_expenses, save_expenses, add_expenses
+from storage import load_expenses, save_expenses, add_expenses, delete_expense
 
 from logic import sum_total, filter_by_month, sum_by_category 
 
@@ -32,8 +32,6 @@ def show_menu():
 
     print("7) Iziet no programmas") 
 
-    # ... pārējās komandas ... 
-
     return input("\nIzvēlies darbību (1-7): ") 
 
  
@@ -66,10 +64,13 @@ def main():
         
 
         elif choice == "3":
-
+            print("\n --- Notiek filtrēšana --- ")
             get_available_months(expenses)
             
             break
+
+        elif choice == "5":
+            delete_expense()
             
 
         elif choice == "7": 
