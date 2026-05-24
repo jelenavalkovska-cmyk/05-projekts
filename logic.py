@@ -1,6 +1,25 @@
 from datetime import datetime 
 
 
+def filter_by_month(expenses, yearmonth): 
+
+    """Atgriež izdevumus, kuru datums ir norādītajā mēnesī.""" 
+
+    result = [] 
+
+    for expense in expenses: 
+       
+       date_str = expense.get("date")
+       year_month = date_str[:7]
+
+       if year_month == yearmonth: 
+
+        print(f"{expense['date']} | {expense['amount']:<5.2f} | {expense['category']:<15} | {expense['description']} ")
+        result.append(expense) 
+
+    return result 
+
+
 def get_available_months(expenses):
 
     available_month = set()
@@ -13,31 +32,39 @@ def get_available_months(expenses):
     sorted_periods = sorted(list(available_month))
     
     if sorted_periods:
-        for period in sorted_periods:
-            print(f". {period}")
+        for i, period in enumerate(sorted_periods, 1):
+            print(f"{i}. {period}")
         print(f"Kopā atrasti {len(sorted_periods)} unikāli mēneši")
+        #return(sorted_periods)
+        print(f"Izvēlies, par kuru periodu Tu gribi pārskatu: 1- {len(sorted_periods)}")
     else: 
         print("Netika atrasts neviens periods")
+        return None
+    
+    # Prasām lietotājam veikt izvēli
+    while True:
+            try:
+                choice_period = int(input(f"\nIzvēlieties perioda numuru (1-{len(sorted_periods)}): "))
+                if 1 <= choice_period <= len(sorted_periods):
+                    # Atgriežam izvēlēto mēnesi kā tekstu, piemēram, "2026-05"
+                    selected_month = sorted_periods[choice_period - 1]
+                    #return selected_month
+                    print(selected_month)
+                    print(f"\n--- Izdevumi par periodu: {selected_month} ---")
+                    filter_by_month(expenses, selected_month) 
+                    break
+                else:
+                    print(f"Lūdzu, ievadiet skaitli no 1 līdz {len(sorted_periods)}.")
+                    break
+            except ValueError:
+                print("Kļūda: Lūdzu, ievadiet tikai numuru!")          
 
-    return(sorted_periods)               
+
+                   
 
  
 
-def filter_by_month(expenses, year, month): 
 
-    """Atgriež izdevumus, kuru datums ir norādītajā mēnesī.""" 
-
-    result = [] 
-
-    for expense in expenses: 
-
-        d = datetime.strptime(expense["date"], "%Y-%m-%d") 
-
-        if d.year == year and d.month == month: 
-
-            result.append(expense) 
-
-    return result 
 
 
 
