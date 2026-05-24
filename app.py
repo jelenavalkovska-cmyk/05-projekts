@@ -69,6 +69,15 @@ def main():
             
             break
 
+
+        elif choice == "4":
+            print("-" * 75)
+            print("Kopsavilkums pa kategorijām:")
+            print("-" * 75)
+            print(sum_by_category(expenses))
+
+
+
         elif choice == "5":
             delete_expense()
             
