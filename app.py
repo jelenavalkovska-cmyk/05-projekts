@@ -2,7 +2,7 @@ from storage import load_expenses, save_expenses, add_expenses
 
 from logic import sum_total, filter_by_month, sum_by_category 
 
-#from logic import get_available_months 
+from logic import get_available_months
 
 from export import export_to_csv 
 
@@ -18,9 +18,17 @@ def show_menu():
 
     """Parāda galveno izvēlni un atgriež lietotāja izvēli.""" 
 
-    print("\n1) Pievienot izdevumu") 
+    print("1) Pievienot izdevumu") 
 
     print("2) Parādīt izdevumus") 
+
+    print("3) Filtrēt pēc mēneša")
+
+    print("4) Kopsumma pa kategorijām")
+
+    print("5) Dzēst izdevumu")
+
+    print("6) Eksportēt CSV")
 
     print("7) Iziet no programmas") 
 
@@ -54,8 +62,14 @@ def main():
                
                print(f"{item['date']} | {item['amount']:<5.2f} | {item['category']:<15} | {item['description']} ")
 
-
             return(expenses) 
+        
+
+        elif choice == "3":
+
+            get_available_months(expenses)
+            
+            break
             
 
         elif choice == "7": 
